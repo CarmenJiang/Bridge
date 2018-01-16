@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         final Button buttonLearningMode = findViewById(R.id.learningMode);
         final Button buttonListGallery = findViewById(R.id.pictureGallery);
 
-        buttonNameList.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent i = new Intent(MainActivity.this, ListNamesActivity.class);
-                startActivity(i);
-            }
-                }
-        );
+//        buttonNameList.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                Intent i = new Intent(MainActivity.this, ListNamesActivity.class);
+//                startActivity(i);
+//            }
+//                }
+//        );
 
         buttonLearningMode.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
