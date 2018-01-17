@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Name-app</string>
     <string name="list_names">List of names</string>
+    <string name="gallery">Gallery</string>
+    <string name="learningMode">Learning Mode</string>
     <string name="title_activity_learning_mode">LearningModeActivity</string>
     <string name="title_activity_learning_mode_question">LearningModeQuestion</string>
     <string name="edit_message">Enter a name</string>
