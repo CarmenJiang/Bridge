@@ -1,4 +1,4 @@
-package com.example.eier.testingstuff;
+package com.example.carmen.name_app;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
