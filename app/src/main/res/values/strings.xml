@@ -10,4 +10,17 @@
     <string name="next">Next</string>
     <string name="score">Score:</string>
     <string name="title_activity_list_gallery">ListGalleryActivity</string>
+    <string name="title_list_Activity">ListActivity</string>
+    <string name="title_settings_Activity">SettingsActivity</string>
+    <string name="title_show_person_Activity">ShowPersonActivity</string>
+    <string name="title_main_gallery">MainActivity</string>
+    <array name="people">
+        <item>Aang+aang</item>
+        <item>Katara+katara</item>
+        <item>Sokka+sokka</item>
+        <item>Toph+toph</item>
+        <item>Zuko+zuko</item>
+        <item>Iroh+iroh</item>
+        <item>Ozai+ozai</item>
+    </array>
 </resources>
