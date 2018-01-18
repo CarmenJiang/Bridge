@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LearningModeActivity"
             android:label="@string/title_activity_learning_mode"
@@ -26,28 +24,23 @@
             android:name=".LearningModeQuestion"
             android:label="@string/title_activity_learning_mode_question"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-        android:name=".ListGalleryActivity"
-        android:label="@string/title_activity_list_gallery"
-        android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:name=".ListGalleryActivity"
+            android:label="@string/title_activity_list_gallery"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ListActivity"
             android:label="@string/title_list_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_settings_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".showPersonActivity"
             android:label="@string/title_show_person_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
+        <activity android:name=".ViewScoreActivity"></activity>
     </application>
 
 </manifest>
