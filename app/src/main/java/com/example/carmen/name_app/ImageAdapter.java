@@ -1,6 +1,7 @@
 package com.example.carmen.name_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,9 +16,10 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    public ImageAdapter(Context c) {
-
+    public ImageAdapter(Context c, String[] imageNames) {
         mContext = c;
+        setMThumbIds(imageNames);
+
     }
 
     public int getCount() {
@@ -50,9 +52,16 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
-    private Integer[] mThumbIds;;
+    private Integer[] mThumbIds;
 
     private void setMThumbIds(String[] imageNames){
+        mThumbIds = new Integer[imageNames.length];
+        for(int i = 0; i < imageNames.length; i++) {
+            mThumbIds[i] = mContext.getResources().getIdentifier(imageNames[i], "drawable", mContext.getPackageName());
+        }
 
+        if(mThumbIds[0] == null){
+            Log.i("some", "stuff");
+        }
     }
 }

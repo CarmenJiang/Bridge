@@ -32,5 +32,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ListActivity.class));
             }
         });
+
+        Button galleryButton = (Button)findViewById(R.id.galleryButton);
+
+        galleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ListGalleryActivity.class));
+            }
+        });
+
+        Button learningModeButton = (Button)findViewById(R.id.learningButton);
+
+        learningModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LearningModeActivity.class));
+            }
+        });
+
+
     }
 }

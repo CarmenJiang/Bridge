@@ -19,24 +19,31 @@ public class ListGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_gallery);
 
-        GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this));
-        final Button buttonHome = findViewById(R.id.buttonHome);
-
-
         final String[] aArr = getResources().getStringArray(R.array.people);
 
         final String[] bArr = new String[aArr.length];
         for(int i = 0; i < aArr.length; i++){
-            bArr[i] = aArr[i].split("\\+")[0];
+            bArr[i] = aArr[i].split("\\+")[1];
         }
+
+        GridView gridview = (GridView) findViewById(R.id.gridView);
+        gridview.setAdapter(new ImageAdapter(this,bArr));
+        final Button buttonHome = findViewById(R.id.buttonHome);
+
+
+
+
+
+
+
 
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(ListGalleryActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListGalleryActivity.this, showPersonActivity.class);
+                intent.putExtra("name", aArr[position]);
+                startActivity(intent);
             }
         });
 
