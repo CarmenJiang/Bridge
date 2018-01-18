@@ -22,8 +22,9 @@
         app:layout_constraintStart_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
@@ -31,17 +32,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/homebar" />
+            <include
+                layout="@layout/homebar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="200dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/score"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,32 +59,36 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:layout_weight="2"
             android:layout_width="293dp"
-            android:layout_height="259dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="60dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+
+
             app:srcCompat="@drawable/mushroom" />
 
 
         <LinearLayout
-            android:layout_width="384dp"
-            android:layout_height="239dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="60dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editText3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:ems="10"
                 android:hint="@string/edit_message"
                 android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/buttonNext"
-                android:layout_width="94dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
