@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton settingsbtn = (ImageButton)findViewById(R.id.settingsButton);
         if(settingsbtn == null)
-            Log.i("adw","eoiadjoi");
         settingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

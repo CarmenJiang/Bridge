@@ -37,6 +37,9 @@ public class showPersonActivity extends AppCompatActivity {
 
 
 
+
+
+
        /* TextView textView = (TextView) findViewById(R.id.personName);*/
         setSupportActionBar(toolbar);
 

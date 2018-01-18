@@ -36,7 +36,6 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListActivity.this, showPersonActivity.class);
-                String[] sArr = getResources().getStringArray(R.array.people)[i].split("|");
                 intent.putExtra("name", aArr[i]);
                 startActivity(intent);
 
