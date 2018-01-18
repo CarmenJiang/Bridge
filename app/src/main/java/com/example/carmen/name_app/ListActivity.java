@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -18,6 +21,15 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        final Button button = findViewById(R.id.buttonHome);
+
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         final String[] aArr = getResources().getStringArray(R.array.people);
 

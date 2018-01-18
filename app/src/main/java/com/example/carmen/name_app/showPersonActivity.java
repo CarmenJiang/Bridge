@@ -1,6 +1,7 @@
 package com.example.carmen.name_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +27,16 @@ public class showPersonActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
         String[] info = getIntent().getStringExtra("name").split("\\+");
         textView.setText(info[0]);
+
+final Button button = findViewById(R.id.buttonHome);
+
+button.setOnClickListener(new View.OnClickListener(){
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(showPersonActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+});
 
 
         //set Picture
