@@ -17,12 +17,14 @@
     <string name="title_show_person_Activity">ShowPersonActivity</string>
     <string name="title_main_gallery">MainActivity</string>
     <array name="people">
-        <item>Aang+aang</item>
-        <item>Katara+katara</item>
-        <item>Sokka+sokka</item>
-        <item>Toph+toph</item>
-        <item>Zuko+zuko</item>
-        <item>Iroh+iroh</item>
-        <item>Ozai+ozai</item>
+        <item>Adam Sandler+adam_sandler</item>
+        <item>Andy Signore+andy_signore</item>
+        <item>Bill Murray+bill_murray</item>
+        <item>Johnny Depp+johnny_depp</item>
+        <item>Kim Kardashian+kim_kardashian</item>
+        <item>Mel Blanc+mel_blanc</item>
+        <item>Miley Cyrus+miley_cyrus</item>
+        <item>Ozzy Osbourne+ozzy_osbourne</item>
+        <item>Robert Downey Jr+robert_downey_jr</item>
     </array>
 </resources>

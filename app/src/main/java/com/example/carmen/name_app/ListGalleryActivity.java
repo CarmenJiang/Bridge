@@ -23,6 +23,15 @@ public class ListGalleryActivity extends AppCompatActivity {
         gridview.setAdapter(new ImageAdapter(this));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
+
+        final String[] aArr = getResources().getStringArray(R.array.people);
+
+        final String[] bArr = new String[aArr.length];
+        for(int i = 0; i < aArr.length; i++){
+            bArr[i] = aArr[i].split("\\+")[0];
+        }
+
+
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {

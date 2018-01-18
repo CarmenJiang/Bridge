@@ -24,8 +24,6 @@ public class ListActivity extends AppCompatActivity {
         final String[] bArr = new String[aArr.length];
         for(int i = 0; i < aArr.length; i++){
             bArr[i] = aArr[i].split("\\+")[0];
-
-
         }
 
         final ListView listView = (ListView) findViewById(R.id.list);
