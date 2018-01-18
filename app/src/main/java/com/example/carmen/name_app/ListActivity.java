@@ -31,22 +31,22 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        final String[] aArr = getResources().getStringArray(R.array.people);
+        final String[] info = getResources().getStringArray(R.array.people);
 
-        final String[] bArr = new String[aArr.length];
-        for(int i = 0; i < aArr.length; i++){
-            bArr[i] = aArr[i].split("\\+")[0];
+        final String[] names = new String[info.length];
+        for(int i = 0; i < info.length; i++){
+            names[i] = info[i].split("\\+")[0];
         }
 
         final ListView listView = (ListView) findViewById(R.id.list);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, bArr);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListActivity.this, showPersonActivity.class);
-                intent.putExtra("name", aArr[i]);
+                intent.putExtra("personInfo", info[i]);
                 startActivity(intent);
 
             }

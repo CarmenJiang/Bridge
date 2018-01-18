@@ -59,9 +59,5 @@ public class ImageAdapter extends BaseAdapter {
         for(int i = 0; i < imageNames.length; i++) {
             mThumbIds[i] = mContext.getResources().getIdentifier(imageNames[i], "drawable", mContext.getPackageName());
         }
-
-        if(mThumbIds[0] == null){
-            Log.i("some", "stuff");
-        }
     }
 }

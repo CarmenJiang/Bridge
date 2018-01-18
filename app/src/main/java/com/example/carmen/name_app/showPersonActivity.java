@@ -25,7 +25,7 @@ public class showPersonActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView textView = (TextView) findViewById(R.id.personName);
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
-        String[] info = getIntent().getStringExtra("name").split("\\+");
+        String[] info = getIntent().getStringExtra("personInfo").split("\\+");
         textView.setText(info[0]);
 
 final Button button = findViewById(R.id.buttonHome);
