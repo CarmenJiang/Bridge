@@ -29,7 +29,7 @@ public class ListGalleryActivity extends AppCompatActivity {
         GridView gridview = (GridView) findViewById(R.id.gridView);
         gridview.setAdapter(new ImageAdapter(this,images));
         final Button buttonHome = findViewById(R.id.buttonHome);
-        
+
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v,
