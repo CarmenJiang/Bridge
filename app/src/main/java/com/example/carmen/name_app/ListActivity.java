@@ -1,6 +1,7 @@
 package com.example.carmen.name_app;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +18,18 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
+    MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bensound_jazzyfrenchy);
+
+            mediaPlayer.start();
+
+
         final Button button = findViewById(R.id.buttonHome);
 
         button.setOnClickListener(new View.OnClickListener(){
@@ -51,6 +60,17 @@ public class ListActivity extends AppCompatActivity {
 
             }
         });
+
+
+        }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        mediaPlayer.stop();
+        mediaPlayer.release();
+
+
 
 
 
