@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageButton settingsbtn = (ImageButton)findViewById(R.id.settingsButton);
-        if(settingsbtn == null)
+        if(settingsbtn != null)
         settingsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button listbtn = (Button)findViewById(R.id.listButton);
-
+        if(listbtn != null)
         listbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button galleryButton = (Button)findViewById(R.id.galleryButton);
 
+        if(galleryButton != null)
         galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button learningModeButton = (Button)findViewById(R.id.learningButton);
 
+        if(learningModeButton != null)
         learningModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
