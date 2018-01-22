@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.carmen.name_app">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,7 +43,8 @@
             android:name=".showPersonActivity"
             android:label="@string/title_show_person_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewScoreActivity"></activity>
+        <activity android:name=".ViewScoreActivity" />
+        <activity android:name=".AddNewPerson"></activity>
     </application>
 
 </manifest>
