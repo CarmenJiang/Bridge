@@ -24,6 +24,7 @@ public class ViewScoreActivity extends AppCompatActivity {
         buttonHome.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent i = new Intent(ViewScoreActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
 
             }

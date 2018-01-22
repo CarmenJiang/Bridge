@@ -1,5 +1,6 @@
 package com.example.carmen.name_app;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class ListGalleryActivity extends AppCompatActivity {
 
     @Override
@@ -19,15 +27,33 @@ public class ListGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_gallery);
 
-        final String[] info = getResources().getStringArray(R.array.people);
+        final ArrayList<String> info = new ArrayList<String>();
 
-        final String[] images = new String[info.length];
-        for(int i = 0; i < info.length; i++){
-            images[i] = info[i].split("\\+")[1];
+        try {
+            FileInputStream fileInputStream = openFileInput("people");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                info.add(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+
+        final String[] images = new String[info.size()];
+        for (int i = 0; i < info.size(); i++) {
+            images[i] = info.get(i).split("\\+")[1];
+        }
+
+
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this,images));
+        gridview.setAdapter(new ImageAdapter(this,images,new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath()));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
@@ -35,7 +61,7 @@ public class ListGalleryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent intent = new Intent(ListGalleryActivity.this, showPersonActivity.class);
-                intent.putExtra("personInfo", info[position]);
+                intent.putExtra("personInfo", info.get(position));
                 startActivity(intent);
             }
         });
@@ -44,6 +70,7 @@ public class ListGalleryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ListGalleryActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
             }
         });
