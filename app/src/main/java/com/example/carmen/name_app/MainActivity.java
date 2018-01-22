@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         return file.exists();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     private void saveImages() {
 
         final String[] info = getResources().getStringArray(R.array.people);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             String imageName = str.split("\\+")[1];
 
             int id = getResources().getIdentifier(imageName, "drawable", getPackageName());
-            ;
+
 
             Drawable drawable = (Drawable) getResources().getDrawable(id);
 
