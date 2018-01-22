@@ -1,5 +1,6 @@
 package com.example.carmen.name_app;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -52,7 +53,7 @@ public class ListGalleryActivity extends AppCompatActivity {
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this,images));
+        gridview.setAdapter(new ImageAdapter(this,images,new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath()));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
@@ -69,6 +70,7 @@ public class ListGalleryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ListGalleryActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
             }
         });

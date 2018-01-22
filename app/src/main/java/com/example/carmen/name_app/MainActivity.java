@@ -139,13 +139,9 @@ public class MainActivity extends AppCompatActivity {
 
                     stream = new FileOutputStream(file);
 
-
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
-
                     stream.flush();
-
-
                     stream.close();
 
                 } catch (IOException e) // Catch the exception

@@ -30,6 +30,7 @@ buttonQuestion.setOnClickListener(new View.OnClickListener() {
 buttonHome.setOnClickListener(new View.OnClickListener(){
     public void onClick(View view){
         Intent i = new Intent(LearningModeActivity.this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
 
     }

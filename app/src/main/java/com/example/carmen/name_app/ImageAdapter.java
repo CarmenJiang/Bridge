@@ -1,12 +1,19 @@
 package com.example.carmen.name_app;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Carmen on 15.01.2018.
@@ -16,15 +23,15 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    public ImageAdapter(Context c, String[] imageNames) {
+    public ImageAdapter(Context c, String[] imageNames, String imagePath) {
         mContext = c;
-        setMThumbIds(imageNames);
+        setMThumbIds(imageNames,imagePath);
 
     }
 
     public int getCount() {
 
-        return mThumbIds.length;
+        return mBitmapImages.length;
     }
 
     public Object getItem(int position) {
@@ -48,16 +55,34 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageBitmap(mBitmapImages[position]);
         return imageView;
     }
 
-    private Integer[] mThumbIds;
+    private Bitmap[] mBitmapImages;
 
-    private void setMThumbIds(String[] imageNames){
-        mThumbIds = new Integer[imageNames.length];
+    private void setMThumbIds(String[] imageNames, String imagePath){
+        mBitmapImages = new Bitmap[imageNames.length];
         for(int i = 0; i < imageNames.length; i++) {
-            mThumbIds[i] = mContext.getResources().getIdentifier(imageNames[i], "drawable", mContext.getPackageName());
+            mBitmapImages[i] = loadImageFromStorage(imagePath, imageNames[i]);
+
         }
+    }
+
+
+    private Bitmap loadImageFromStorage(String path, String picName)
+    {
+
+        try {
+            File f=new File( path, picName + ".jpg");
+            return BitmapFactory.decodeStream(new FileInputStream(f));
+
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
