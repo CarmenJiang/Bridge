@@ -21,30 +21,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ListGalleryActivity extends AppCompatActivity {
+    saveFileHandler sfh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_gallery);
-
-        final ArrayList<String> info = new ArrayList<String>();
-
-        try {
-            FileInputStream fileInputStream = openFileInput("people");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                info.add(line);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        sfh = new saveFileHandler(getApplicationContext());
+        final ArrayList<String> info = sfh.getPeople();
 
         final String[] images = new String[info.size()];
         for (int i = 0; i < info.size(); i++) {
@@ -53,11 +37,11 @@ public class ListGalleryActivity extends AppCompatActivity {
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this,images,new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath()));
+        gridview.setAdapter(new ImageAdapter(this, images, new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath()));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent intent = new Intent(ListGalleryActivity.this, showPersonActivity.class);

@@ -1,10 +1,8 @@
 package com.example.carmen.name_app;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,7 +23,7 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c, String[] imageNames, String imagePath) {
         mContext = c;
-        setMThumbIds(imageNames,imagePath);
+        setupmBitmapImages(imageNames,imagePath);
 
     }
 
@@ -61,7 +59,7 @@ public class ImageAdapter extends BaseAdapter {
 
     private Bitmap[] mBitmapImages;
 
-    private void setMThumbIds(String[] imageNames, String imagePath){
+    private void setupmBitmapImages(String[] imageNames, String imagePath){
         mBitmapImages = new Bitmap[imageNames.length];
         for(int i = 0; i < imageNames.length; i++) {
             mBitmapImages[i] = loadImageFromStorage(imagePath, imageNames[i]);

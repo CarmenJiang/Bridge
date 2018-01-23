@@ -50,23 +50,8 @@ public class ListActivity extends AppCompatActivity {
         });
 
 
-        final ArrayList<String> info = new ArrayList<String>();
-
-        try {
-            FileInputStream fileInputStream = openFileInput("people");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                info.add(line);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       saveFileHandler sfh = new saveFileHandler(getApplicationContext());
+        final ArrayList<String> info = sfh.getPeople();
 
 
         final String[] names = new String[info.size()];

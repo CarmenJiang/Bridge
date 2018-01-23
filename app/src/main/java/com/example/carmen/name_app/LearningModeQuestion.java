@@ -3,6 +3,7 @@ package com.example.carmen.name_app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,19 +17,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class LearningModeQuestion extends AppCompatActivity {
-String [] info;
+ ArrayList<String> info;
 int rand;
 String correctName;
 EditText enterName;
 TextView sc;
+    saveFileHandler sfh;
 int score = 0;
 int turns = 1;
     ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+         sfh = new saveFileHandler(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning_mode_question);
         sc = findViewById(R.id.score);
@@ -36,7 +40,7 @@ int turns = 1;
         final Button buttonHome = findViewById(R.id.buttonHome);
         final Button next = findViewById(R.id.buttonNext);
         enterName = findViewById(R.id.enterName);
-        info = getResources().getStringArray(R.array.people);
+        info = sfh.getPeople();
          imageView = findViewById(R.id.randomPicture);
          nextPicture();
 
@@ -75,11 +79,10 @@ hideKeyboard();
 
     private void nextPicture(){
         Random rm = new Random();
-        rand = rm.nextInt(info.length);
-        correctName = info[rand].split("\\+")[0];
-        Context context = imageView.getContext();
-        int id = context.getResources().getIdentifier(info[rand].split("\\+")[1],"drawable", context.getPackageName());
-        imageView.setImageResource(id);
+        rand = rm.nextInt(info.size());
+        correctName = info.get(rand).split("\\+")[0];
+       Bitmap picture = sfh.getImage(info.get(rand).split("\\+")[1]);
+        imageView.setImageBitmap(picture);
     }
 
     public void hideKeyboard() {

@@ -30,12 +30,13 @@ public class AddNewPerson extends AppCompatActivity {
     ImageView imageView;
     EditText editText;
     Bitmap bitmap;
+    saveFileHandler sfh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_person);
-
+        sfh = new saveFileHandler(getApplicationContext());
         final Button pictureFromCamera = findViewById(R.id.addPictureFromCamera);
         final Button pictureFromGallery = findViewById(R.id.addPictureFromGallery);
         final Button saveButton = findViewById(R.id.saveButton);
@@ -56,66 +57,12 @@ public class AddNewPerson extends AppCompatActivity {
             public void onClick(View v) {
 
                 String name = editText.getText().toString();
-                bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 if (bitmap != null && name != "" && name != null) {
                     String filename = name.toLowerCase().replace(' ', '_');
 
-                    try {
-
-
-
-                        FileInputStream fileInputStream = openFileInput("people");
-                        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                        String line;
-                        String prevNames = "";
-                        while ((line = bufferedReader.readLine()) != null) {
-                            prevNames += (line + "\n");
-                        }
-                        Log.i("qwerty", prevNames);
-
-                        FileOutputStream fOut = openFileOutput("people", Context.MODE_PRIVATE);
-                        Log.i("qwerty", prevNames);
-                            fOut.write(prevNames.getBytes());
-                            fOut.write((name + "+" + filename + "\n").getBytes());
-                        fOut.close();
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    ContextWrapper wrapper = new ContextWrapper(getApplicationContext());
-
-                    // Initializing a new file
-                    // The bellow line return a directory in internal storage
-
-                    File file = wrapper.getDir("Images", MODE_PRIVATE);
-
-                    // Create a file to save the image
-                    file = new File(file, filename + ".jpg");
-
-                    if (!file.exists()) {
-
-                        Log.i("file Doesn't exist", file.getPath());
-                        try {
-
-                            OutputStream stream = null;
-
-                            stream = new FileOutputStream(file);
-
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
-                            stream.flush();
-                            stream.close();
-
-                        } catch (IOException e) // Catch the exception
-                        {
-                            e.printStackTrace();
-                        }
-                    }
+                    sfh.writeToPeople(name, filename);
+                    sfh.saveImage(filename,bitmap);
                 }
 
 
