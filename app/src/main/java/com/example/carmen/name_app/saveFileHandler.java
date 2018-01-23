@@ -132,7 +132,7 @@ public class saveFileHandler {
 
                     stream = new FileOutputStream(file);
 
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
 
                     stream.flush();
                     stream.close();
@@ -166,7 +166,7 @@ public class saveFileHandler {
 
                 stream = new FileOutputStream(file);
 
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
 
                 stream.flush();
                 stream.close();
