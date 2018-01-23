@@ -31,26 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        saveImages();
+        saveFileHandler sfh = new saveFileHandler(getApplicationContext());
 
-        if (!fileExist("people")) {
+        sfh.setupImages();
+        sfh.setupPeople();
 
-            try {
-                FileOutputStream fOut = openFileOutput("people", Context.MODE_PRIVATE);
 
-                final String[] info = getResources().getStringArray(R.array.people);
 
-                for (String str : info)
-                    fOut.write((str + "\n").getBytes());
-                fOut.close();
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
 
         ImageButton settingsbtn = (ImageButton) findViewById(R.id.settingsButton);
         if (settingsbtn != null)
@@ -92,65 +80,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    private boolean fileExist(String fname) {
-        File file = getBaseContext().getFileStreamPath(fname);
-        return file.exists();
-    }
-
-
-    private void saveImages() {
-
-        final String[] info = getResources().getStringArray(R.array.people);
-
-        for (String str : info) {
-
-            // Get the image from drawable resource as drawable object
-
-            String imageName = str.split("\\+")[1];
-
-            int id = getResources().getIdentifier(imageName, "drawable", getPackageName());
-
-
-            Drawable drawable = (Drawable) getResources().getDrawable(id);
-
-            // Get the bitmap from drawable object
-            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-
-
-            ContextWrapper wrapper = new ContextWrapper(getApplicationContext());
-
-
-            // Initializing a new file
-            // The bellow line return a directory in internal storage
-
-            File file = wrapper.getDir("Images", MODE_PRIVATE);
-
-
-            // Create a file to save the image
-            file = new File(file, imageName + ".jpg");
-
-            if (!file.exists()) {
-
-                Log.i("file Doesn't exist", file.getPath());
-                try {
-
-                    OutputStream stream = null;
-
-                    stream = new FileOutputStream(file);
-
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
-                    stream.flush();
-                    stream.close();
-
-                } catch (IOException e) // Catch the exception
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
 }
