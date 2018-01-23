@@ -183,18 +183,9 @@ public class saveFileHandler {
 
         try {
 
-            FileInputStream fileInputStream = mContext.openFileInput("people");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-            String line;
-            String prevNames = "";
-            while ((line = bufferedReader.readLine()) != null) {
-                prevNames += (line + "\n");
-            }
 
-            FileOutputStream fOut = mContext.openFileOutput("people", Context.MODE_PRIVATE);
-            fOut.write(prevNames.getBytes());
+            FileOutputStream fOut = mContext.openFileOutput("people", Context.MODE_APPEND);
             fOut.write((personName + "+" + personImageName + "\n").getBytes());
             fOut.close();
 

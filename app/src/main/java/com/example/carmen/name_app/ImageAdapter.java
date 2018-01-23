@@ -20,9 +20,11 @@ import java.io.FileNotFoundException;
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
+    private saveFileHandler sfh;
 
     public ImageAdapter(Context c, String[] imageNames, String imagePath) {
         mContext = c;
+        sfh = new saveFileHandler(c);
         setupmBitmapImages(imageNames,imagePath);
 
     }
@@ -62,25 +64,11 @@ public class ImageAdapter extends BaseAdapter {
     private void setupmBitmapImages(String[] imageNames, String imagePath){
         mBitmapImages = new Bitmap[imageNames.length];
         for(int i = 0; i < imageNames.length; i++) {
-            mBitmapImages[i] = loadImageFromStorage(imagePath, imageNames[i]);
+            mBitmapImages[i] = sfh.getImage(imageNames[i]);
 
         }
     }
 
 
-    private Bitmap loadImageFromStorage(String path, String picName)
-    {
 
-        try {
-            File f=new File( path, picName + ".jpg");
-            return BitmapFactory.decodeStream(new FileInputStream(f));
-
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 }
