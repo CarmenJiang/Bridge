@@ -106,7 +106,9 @@
             android:id="@+id/addName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:hint="@string/edit_message"/>
+            android:hint="@string/edit_message"
+            android:inputType="textPersonName"/>
+        
 
         <Button
             android:id="@+id/saveButton"
