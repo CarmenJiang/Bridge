@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -29,6 +30,15 @@ public class ListGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_gallery);
         sfh = new saveFileHandler(getApplicationContext());
         final ArrayList<String> info = sfh.getPeople();
+        final ImageView addPerson = findViewById(R.id.addPerson);
+
+        addPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListGalleryActivity.this, AddNewPerson.class);
+                startActivity(i);
+            }
+        });
 
         final String[] images = new String[info.size()];
         for (int i = 0; i < info.size(); i++) {

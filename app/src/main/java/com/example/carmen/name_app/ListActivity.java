@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
@@ -39,6 +40,7 @@ public class ListActivity extends AppCompatActivity {
 
 
         final Button button = findViewById(R.id.buttonHome);
+        final ImageView addPerson = findViewById(R.id.addPerson);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +76,13 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-
+        addPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListActivity.this, AddNewPerson.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
