@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,7 @@ int rand;
 String correctName;
 EditText enterName;
 TextView sc;
+MediaPlayer mediaPlayer;
     saveFileHandler sfh;
 int score = 0;
 int turns = 1;
@@ -43,8 +45,6 @@ int turns = 1;
         info = sfh.getPeople();
          imageView = findViewById(R.id.randomPicture);
          nextPicture();
-
-
 
         buttonHome.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -95,5 +95,19 @@ hideKeyboard();
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.stop();
+        mediaPlayer.release();
 
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bensound_jazzyfrenchy);
+        mediaPlayer.start();
+    }
 }

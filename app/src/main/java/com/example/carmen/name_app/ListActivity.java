@@ -34,10 +34,6 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bensound_jazzyfrenchy);
-
-//            mediaPlayer.start();
-
 
         final Button button = findViewById(R.id.buttonHome);
         final ImageView addPerson = findViewById(R.id.addPerson);
@@ -85,13 +81,5 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        mediaPlayer.stop();
-//        mediaPlayer.release();
-
-
-    }
 
 }

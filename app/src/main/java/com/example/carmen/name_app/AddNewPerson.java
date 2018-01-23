@@ -51,10 +51,10 @@ public class AddNewPerson extends AppCompatActivity {
                     String filename = name.toLowerCase().replace(' ', '_');
 
                     sfh.writeToPeople(name, filename);
-                    sfh.saveImage(filename,bitmap);
+                    sfh.saveImage(filename, bitmap);
                 }
 
-finish();
+                finish();
             }
         });
 
