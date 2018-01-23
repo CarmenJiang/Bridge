@@ -25,7 +25,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         final Button button = findViewById(R.id.buttonHome);
-        final Button add = findViewById(R.id.addPerson);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,13 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-add.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent i = new Intent(SettingsActivity.this, AddNewPerson.class);
-        startActivity(i);
-    }
-});
+
     }
 
 }
