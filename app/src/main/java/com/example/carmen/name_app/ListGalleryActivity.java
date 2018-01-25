@@ -2,6 +2,7 @@ package com.example.carmen.name_app;
 
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ListGalleryActivity extends AppCompatActivity {
     saveFileHandler sfh;
@@ -28,8 +31,6 @@ public class ListGalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_gallery);
-        sfh = new saveFileHandler(getApplicationContext());
-        final ArrayList<String> info = sfh.getPeople();
         final ImageView addPerson = findViewById(R.id.addPerson);
 
         addPerson.setOnClickListener(new View.OnClickListener() {
@@ -40,14 +41,18 @@ public class ListGalleryActivity extends AppCompatActivity {
             }
         });
 
-        final String[] images = new String[info.size()];
-        for (int i = 0; i < info.size(); i++) {
-            images[i] = info.get(i).split("\\+")[1];
+        final ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+        final ArrayList<String> names = new ArrayList<String>();
+        Iterator it = PersonMap.map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            names.add((String)pair.getKey());
+            images.add((Bitmap)pair.getValue());
         }
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this, images, new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath()));
+        gridview.setAdapter(new ImageAdapter(this, images.toArray(new Bitmap[images.size()])));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
@@ -55,7 +60,7 @@ public class ListGalleryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent intent = new Intent(ListGalleryActivity.this, showPersonActivity.class);
-                intent.putExtra("personInfo", info.get(position));
+                intent.putExtra("name", names.get(position));
                 startActivity(intent);
             }
         });

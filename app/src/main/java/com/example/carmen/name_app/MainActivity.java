@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         sfh.setupImages();
         sfh.setupPeople();
+        PersonMap.setupMap(sfh);
 
 
 

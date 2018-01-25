@@ -29,53 +29,27 @@ public class showPersonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_person);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView textView = (TextView) findViewById(R.id.personName);
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
-        String[] info = getIntent().getStringExtra("personInfo").split("\\+");
-        textView.setText(info[0]);
+        String name = getIntent().getStringExtra("name");
+        textView.setText(name);
+        imageView.setImageBitmap(PersonMap.map.get(name));
 
-final Button button = findViewById(R.id.buttonHome);
+        final Button button = findViewById(R.id.buttonHome);
 
-button.setOnClickListener(new View.OnClickListener(){
-    @Override
-    public void onClick(View v) {
-        Intent i = new Intent(showPersonActivity.this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-    }
-});
-
-
-        //set Picture
-//        Context context = imageView.getContext();
-//        int id = context.getResources().getIdentifier(info[1], "drawable", context.getPackageName());
-//        imageView.setImageResource(id);
-
-        loadImageFromStorage( new ContextWrapper(getApplicationContext()).getDir("Images", MODE_PRIVATE).getPath(), info[1]);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(showPersonActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        });
 
 
 
        /* TextView textView = (TextView) findViewById(R.id.personName);*/
-        setSupportActionBar(toolbar);
 
-
-    }
-
-
-    private void loadImageFromStorage(String path, String picName)
-    {
-
-        try {
-            File f=new File( path, picName + ".jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img=(ImageView)findViewById(R.id.personPicture);
-            img.setImageBitmap(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
 
     }
 

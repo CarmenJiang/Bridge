@@ -34,9 +34,6 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bensound_jazzyfrenchy);
-
-//            mediaPlayer.start();
 
 
         final Button button = findViewById(R.id.buttonHome);

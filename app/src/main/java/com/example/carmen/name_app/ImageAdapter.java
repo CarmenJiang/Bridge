@@ -21,12 +21,12 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
     private saveFileHandler sfh;
+    private Bitmap[] mBitmapImages;
 
-    public ImageAdapter(Context c, String[] imageNames, String imagePath) {
+    public ImageAdapter(Context c, Bitmap[] bitmaps) {
         mContext = c;
         sfh = new saveFileHandler(c);
-        setupmBitmapImages(imageNames,imagePath);
-
+        mBitmapImages = bitmaps;
     }
 
     public int getCount() {
@@ -59,15 +59,8 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
-    private Bitmap[] mBitmapImages;
 
-    private void setupmBitmapImages(String[] imageNames, String imagePath){
-        mBitmapImages = new Bitmap[imageNames.length];
-        for(int i = 0; i < imageNames.length; i++) {
-            mBitmapImages[i] = sfh.getImage(imageNames[i]);
 
-        }
-    }
 
 
 
