@@ -82,13 +82,5 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        mediaPlayer.stop();
-//        mediaPlayer.release();
-
-
-    }
 
 }
