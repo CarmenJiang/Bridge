@@ -53,6 +53,7 @@ public class AddNewPerson extends AppCompatActivity {
                     sfh.writeToPeople(name, filename);
                     sfh.saveImage(filename, bitmap);
                 }
+                PersonMap.map.put(name, bitmap);
 
                 finish();
             }

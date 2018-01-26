@@ -33,7 +33,7 @@ public class showPersonActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
         String name = getIntent().getStringExtra("name");
         textView.setText(name);
-        imageView.setImageBitmap(PersonMap.map.get(name));
+        imageView.setImageBitmap(PersonMap.getFullSizedPicture(name));
 
         final Button button = findViewById(R.id.buttonHome);
 

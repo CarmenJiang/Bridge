@@ -1,6 +1,7 @@
 package com.example.carmen.name_app;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,11 +24,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class ListActivity extends AppCompatActivity {
 
-    MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +52,13 @@ public class ListActivity extends AppCompatActivity {
         });
 
 
-       saveFileHandler sfh = new saveFileHandler(getApplicationContext());
-        final ArrayList<String> info = sfh.getPeople();
 
 
-        final String[] names = new String[info.size()];
-        for (int i = 0; i < info.size(); i++) {
-            names[i] = info.get(i).split("\\+")[0];
-        }
+        final ArrayList<String> names = new ArrayList<String>(PersonMap.map.keySet());
+
+
+
+
 
 
         final ListView listView = (ListView) findViewById(R.id.list);
@@ -67,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListActivity.this, showPersonActivity.class);
-                intent.putExtra("personInfo", info.get(i));
+                intent.putExtra("name", names.get(i));
                 startActivity(intent);
 
             }

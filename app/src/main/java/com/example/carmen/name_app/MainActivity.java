@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveFileHandler sfh = new saveFileHandler(getApplicationContext());
 
-        sfh.setupImages();
+
         sfh.setupPeople();
         PersonMap.setupMap(sfh);
 

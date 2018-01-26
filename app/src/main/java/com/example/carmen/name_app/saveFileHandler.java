@@ -71,17 +71,22 @@ public class saveFileHandler {
     }
 
 
-    public void setupPeople(){
+    public void setupPeople() {
         if (!mContext.getFileStreamPath("people").exists()) {
-
+            Log.i("saveFileHandler", "setupHappens");
             try {
                 FileOutputStream fOut = mContext.openFileOutput("people", Context.MODE_PRIVATE);
 
                 final String[] info = mContext.getResources().getStringArray(R.array.people);
 
-                for (String str : info)
-                    fOut.write((str + "\n").getBytes());
+                String[] imageNames = new String[info.length];
+                for (int i = 0; i < info.length; i++) {
+                    fOut.write((info[i] + "\n").getBytes());
+                    imageNames[i] = info[i].split("\\+")[1];
+                }
                 fOut.close();
+                setupImages(imageNames);
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -93,14 +98,11 @@ public class saveFileHandler {
     }
 
 
-    public void setupImages(){
+    public void setupImages(String[] imageNames) {
         final String[] info = mContext.getResources().getStringArray(R.array.people);
 
-        for (String str : info) {
-
+        for (String imageName : imageNames) {
             // Get the image from drawable resource as drawable object
-
-            String imageName = str.split("\\+")[1];
 
             int id = mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
 
@@ -110,52 +112,59 @@ public class saveFileHandler {
             // Get the bitmap from drawable object
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
+            saveThumbnail(imageName,bitmap);
+            saveFullSized(imageName,bitmap);
 
-            ContextWrapper wrapper = new ContextWrapper(mContext);
-
-
-            // Initializing a new file
-            // The bellow line return a directory in internal storage
-
-            File file = wrapper.getDir("Images", mContext.MODE_PRIVATE);
-
-
-            // Create a file to save the image
-            file = new File(file, imageName + ".jpg");
-
-            if (!file.exists()) {
-
-                Log.i("file Doesn't exist", file.getPath());
-                try {
-
-                    OutputStream stream = null;
-
-                    stream = new FileOutputStream(file);
-
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
-                    stream.flush();
-                    stream.close();
-
-                } catch (IOException e) // Catch the exception
-                {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
-    public void saveImage(String imageName, Bitmap bitmap) {
+    private void saveThumbnail(String imageName, Bitmap bitmap) {
 
         ContextWrapper wrapper = new ContextWrapper(mContext);
+
 
         // Initializing a new file
         // The bellow line return a directory in internal storage
 
         File file = wrapper.getDir("Images", mContext.MODE_PRIVATE);
 
-        // Create a file to save the image
+
         file = new File(file, imageName + ".jpg");
+
+        if (!file.exists()) {
+
+            Log.i("file Doesn't exist", file.getPath());
+            try {
+
+                OutputStream stream = null;
+
+                stream = new FileOutputStream(file);
+
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 15, stream);
+
+                stream.flush();
+                stream.close();
+
+            } catch (IOException e) // Catch the exception
+            {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void saveFullSized(String imageName, Bitmap bitmap) {
+
+        ContextWrapper wrapper = new ContextWrapper(mContext);
+
+
+        // Initializing a new file
+        // The bellow line return a directory in internal storage
+
+        File file = wrapper.getDir("Images", mContext.MODE_PRIVATE);
+
+
+        file = new File(file, imageName + "_full_sized" + ".jpg");
 
         if (!file.exists()) {
 
@@ -175,14 +184,21 @@ public class saveFileHandler {
             {
                 e.printStackTrace();
             }
+
         }
+    }
+
+    public void saveImage(String imageName, Bitmap bitmap) {
+
+        saveThumbnail(imageName,bitmap);
+        saveFullSized(imageName,bitmap);
+
 
     }
 
     public void writeToPeople(String personName, String personImageName) {
 
         try {
-
 
 
             FileOutputStream fOut = mContext.openFileOutput("people", Context.MODE_APPEND);

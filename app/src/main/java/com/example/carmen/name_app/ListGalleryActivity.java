@@ -3,11 +3,13 @@ package com.example.carmen.name_app;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,6 +28,8 @@ import java.util.Map;
 
 public class ListGalleryActivity extends AppCompatActivity {
     saveFileHandler sfh;
+    final ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+    final ArrayList<String> names = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,8 @@ public class ListGalleryActivity extends AppCompatActivity {
             }
         });
 
-        final ArrayList<Bitmap> images = new ArrayList<Bitmap>();
-        final ArrayList<String> names = new ArrayList<String>();
+
+        Log.i("TAG","Setting up images");
         Iterator it = PersonMap.map.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
@@ -75,4 +79,17 @@ public class ListGalleryActivity extends AppCompatActivity {
         });
     }
 
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//
+//        Iterator it = PersonMap.map.entrySet().iterator();
+//        while (it.hasNext()) {
+//            Map.Entry pair = (Map.Entry)it.next();
+//            names.add((String)pair.getKey());
+//            images.add((Bitmap)pair.getValue());
+//        }
+//
+//
+//    }
 }

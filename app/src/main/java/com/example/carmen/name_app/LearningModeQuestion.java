@@ -81,7 +81,7 @@ hideKeyboard();
         Random rm = new Random();
         rand = rm.nextInt(info.size());
         correctName = info.get(rand).split("\\+")[0];
-       Bitmap picture = sfh.getImage(info.get(rand).split("\\+")[1]);
+        Bitmap picture = sfh.getImage(info.get(rand).split("\\+")[1] +"_full_sized");
         imageView.setImageBitmap(picture);
     }
 

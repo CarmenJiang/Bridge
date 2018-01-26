@@ -9,9 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.OutputStream;
 
 /**
  * Created by Carmen on 15.01.2018.
@@ -54,6 +57,8 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
+
+
 
         imageView.setImageBitmap(mBitmapImages[position]);
         return imageView;
