@@ -67,16 +67,18 @@ public class AddNewPerson extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                String filename = "";
                 String name = editText.getText().toString();
                 bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 if (bitmap != null && name != "" && name != null) {
-                    String filename = name.toLowerCase().replace(' ', '_');
+                    filename = name.toLowerCase().replace(' ', '_');
 
                     sfh.writeToPeople(name, filename);
                     sfh.saveImage(filename, bitmap);
                 }
-                PersonMap.map.put(name, bitmap);
-                startActivity(new Intent(AddNewPerson.this, getParent().getClass()));
+                PersonMap.map.put(name, sfh.getImageUri(filename));
+//                startActivity(new Intent(AddNewPerson.this, getParent().getClass()));
                 finish();
             }
         });

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -52,6 +53,14 @@ public class saveFileHandler {
         }
 
         return info;
+    }
+
+    public Uri getImageUri(String imageName) {
+
+        String path = new ContextWrapper(mContext).getDir("Images", mContext.MODE_PRIVATE).getPath();
+
+        File f = new File(path, imageName + ".jpg");
+        return Uri.fromFile(f);
     }
 
     public Bitmap getImage(String imageName) {
@@ -112,8 +121,8 @@ public class saveFileHandler {
             // Get the bitmap from drawable object
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
-            saveThumbnail(imageName,bitmap);
-            saveFullSized(imageName,bitmap);
+            saveThumbnail(imageName, bitmap);
+            saveFullSized(imageName, bitmap);
 
         }
     }
@@ -190,8 +199,8 @@ public class saveFileHandler {
 
     public void saveImage(String imageName, Bitmap bitmap) {
 
-        saveThumbnail(imageName,bitmap);
-        saveFullSized(imageName,bitmap);
+        saveThumbnail(imageName, bitmap);
+        saveFullSized(imageName, bitmap);
 
 
     }

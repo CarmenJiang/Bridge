@@ -1,6 +1,7 @@
 package com.example.carmen.name_app;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.TreeMap;
  */
 
 public class PersonMap {
-    public static TreeMap<String, Bitmap> map = new TreeMap<String, Bitmap>();
+    public static TreeMap<String, Uri> map = new TreeMap<String, Uri>();
     private static saveFileHandler saveFileHandler;
 
     public static void setupMap(saveFileHandler sfh) {
@@ -23,7 +24,7 @@ public class PersonMap {
 
             for (String s : pList) {
                 String[] info = s.split("\\+");
-                map.put(info[0], sfh.getImage(info[1]));
+                map.put(info[0], sfh.getImageUri(info[1]));
             }
         }
     }

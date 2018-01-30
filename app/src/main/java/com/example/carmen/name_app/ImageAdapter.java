@@ -3,6 +3,7 @@ package com.example.carmen.name_app;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,17 +25,17 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
     private saveFileHandler sfh;
-    private Bitmap[] mBitmapImages;
+    private Uri[] mBitmapImagesUri;
 
-    public ImageAdapter(Context c, Bitmap[] bitmaps) {
+    public ImageAdapter(Context c, Uri[] bitmapUris) {
         mContext = c;
         sfh = new saveFileHandler(c);
-        mBitmapImages = bitmaps;
+        mBitmapImagesUri = bitmapUris;
     }
 
     public int getCount() {
 
-        return mBitmapImages.length;
+        return mBitmapImagesUri.length;
     }
 
     public Object getItem(int position) {
@@ -59,8 +60,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
 
-
-        imageView.setImageBitmap(mBitmapImages[position]);
+        imageView.setImageURI(mBitmapImagesUri[position]);
         return imageView;
     }
 

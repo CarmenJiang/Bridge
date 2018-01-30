@@ -4,6 +4,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,7 +29,7 @@ import java.util.Map;
 
 public class ListGalleryActivity extends AppCompatActivity {
     saveFileHandler sfh;
-    final ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+    final ArrayList<Uri> images = new ArrayList<Uri>();
     final ArrayList<String> names = new ArrayList<String>();
 
     @Override
@@ -51,12 +52,12 @@ public class ListGalleryActivity extends AppCompatActivity {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             names.add((String)pair.getKey());
-            images.add((Bitmap)pair.getValue());
+            images.add((Uri)pair.getValue());
         }
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this, images.toArray(new Bitmap[images.size()])));
+        gridview.setAdapter(new ImageAdapter(this, images.toArray(new Uri[images.size()])));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
