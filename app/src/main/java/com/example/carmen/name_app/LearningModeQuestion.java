@@ -57,6 +57,8 @@ public class LearningModeQuestion extends AppCompatActivity {
         info = sfh.getPeople();
         imageSwitcher = findViewById(R.id.randomPicture);
 
+
+
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -64,14 +66,13 @@ public class LearningModeQuestion extends AppCompatActivity {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
-                        imageView.setImageURI(nextPicture());
                 return imageView;
             }
         });
 
 
 
-
+        imageSwitcher.setImageURI(nextPicture());
         Animation in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in);
         Animation out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out);
 
@@ -117,6 +118,7 @@ public class LearningModeQuestion extends AppCompatActivity {
         Random rm = new Random();
         rand = rm.nextInt(info.size());
         correctName = info.get(rand).split("\\+")[0];
+        Log.i("correctName", correctName);
         Uri picture = sfh.getImageUri(info.get(rand).split("\\+")[1] + "_full_sized");
         return picture;
     }
