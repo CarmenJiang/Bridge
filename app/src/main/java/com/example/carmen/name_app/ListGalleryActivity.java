@@ -29,8 +29,6 @@ import java.util.Map;
 
 public class ListGalleryActivity extends AppCompatActivity {
     saveFileHandler sfh;
-    final ArrayList<Uri> images = new ArrayList<Uri>();
-    final ArrayList<String> names = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +45,11 @@ public class ListGalleryActivity extends AppCompatActivity {
         });
 
 
-        Log.i("TAG","Setting up images");
-        Iterator it = PersonMap.map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            names.add((String)pair.getKey());
-            images.add((Uri)pair.getValue());
-        }
+
 
 
         GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this, images.toArray(new Uri[images.size()])));
+        gridview.setAdapter(new ImageAdapter(this,R.layout.grid_item_layout, PersonMap.imageItems));
         final Button buttonHome = findViewById(R.id.buttonHome);
 
 
@@ -65,7 +57,7 @@ public class ListGalleryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent intent = new Intent(ListGalleryActivity.this, showPersonActivity.class);
-                intent.putExtra("name", names.get(position));
+                intent.putExtra("PersonNumber", position);
                 startActivity(intent);
             }
         });

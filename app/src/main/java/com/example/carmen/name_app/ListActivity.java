@@ -54,7 +54,7 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-        final ArrayList<String> names = new ArrayList<String>(PersonMap.map.keySet());
+
 
 
 
@@ -63,13 +63,13 @@ public class ListActivity extends AppCompatActivity {
 
         final ListView listView = (ListView) findViewById(R.id.list);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, names);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, PersonMap.getNames());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ListActivity.this, showPersonActivity.class);
-                intent.putExtra("name", names.get(i));
+                intent.putExtra("PersonNumber", i);
                 startActivity(intent);
 
             }

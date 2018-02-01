@@ -13,20 +13,45 @@ import java.util.TreeMap;
  */
 
 public class PersonMap {
-    public static TreeMap<String, Uri> map = new TreeMap<String, Uri>();
+    public static ArrayList<ImageItem> imageItems = new ArrayList<ImageItem>();
     private static saveFileHandler saveFileHandler;
 
-    public static void setupMap(saveFileHandler sfh) {
+    public static void setup(saveFileHandler sfh) {
         saveFileHandler = sfh;
-        if (map.isEmpty()) {
+        if (imageItems.isEmpty()) {
         ArrayList<String> pList = sfh.getPeople();
             Log.i("PersonMap", "setup Happens");
 
             for (String s : pList) {
                 String[] info = s.split("\\+");
-                map.put(info[0], sfh.getImageUri(info[1]));
+                imageItems.add(new ImageItem(scaleDown(sfh.getImage(info[1]), 200, true), info[0]));
             }
         }
+    }
+
+    public static void addImageItem(Bitmap bitmap, String title){
+        imageItems.add(new ImageItem(scaleDown(bitmap, 200, true), title));
+    }
+
+    public static String[] getNames(){
+        String[] strArgs = new String[imageItems.size()];
+        for(int i = 0; i < imageItems.size(); i++){
+            strArgs[i] = imageItems.get(i).getTitle();
+        }
+        return strArgs;
+    }
+
+    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+                            boolean filter) {
+        float ratio = Math.min(
+                (float) maxImageSize / realImage.getWidth(),
+                (float) maxImageSize / realImage.getHeight());
+        int width = Math.round((float) ratio * realImage.getWidth());
+        int height = Math.round((float) ratio * realImage.getHeight());
+
+        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+                height, filter);
+        return newBitmap;
     }
 
     public static Bitmap getFullSizedPicture(String key){

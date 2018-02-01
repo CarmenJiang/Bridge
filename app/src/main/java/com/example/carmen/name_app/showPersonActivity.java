@@ -31,9 +31,9 @@ public class showPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_person);
         TextView textView = (TextView) findViewById(R.id.personName);
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
-        String name = getIntent().getStringExtra("name");
-        textView.setText(name);
-        imageView.setImageBitmap(PersonMap.getFullSizedPicture(name));
+        ImageItem person = PersonMap.imageItems.get(getIntent().getIntExtra("PersonNumber", 0));
+        textView.setText(person.getTitle());
+        imageView.setImageBitmap(PersonMap.getFullSizedPicture(person.getTitle()));
 
         final Button button = findViewById(R.id.buttonHome);
 

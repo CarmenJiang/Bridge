@@ -98,6 +98,7 @@ public class LearningModeQuestion extends AppCompatActivity {
                 if (turns == 10) {
                     Intent i = new Intent(LearningModeQuestion.this, ViewScoreActivity.class);
                     i.putExtra("score", score);
+                    finish();
                     startActivity(i);
                 }else{
                     imageSwitcher.setImageURI(nextPicture());

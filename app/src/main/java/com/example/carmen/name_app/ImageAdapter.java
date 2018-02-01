@@ -1,14 +1,19 @@
 package com.example.carmen.name_app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,57 +21,55 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by Carmen on 15.01.2018.
  */
 
-public class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends ArrayAdapter {
 
-    private Context mContext;
-    private saveFileHandler sfh;
-    private Uri[] mBitmapImagesUri;
+    private Context context;
+    private int layoutResourceId;
+    private ArrayList data = new ArrayList();
 
-    public ImageAdapter(Context c, Uri[] bitmapUris) {
-        mContext = c;
-        sfh = new saveFileHandler(c);
-        mBitmapImagesUri = bitmapUris;
+    public ImageAdapter(Context context, int layoutResourceId, ArrayList data) {
+        super(context, layoutResourceId, data);
+        this.layoutResourceId = layoutResourceId;
+        this.context = context;
+        this.data = data;
     }
 
-    public int getCount() {
+    @Override
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-        return mBitmapImagesUri.length;
-    }
 
-    public Object getItem(int position) {
-        return null;
-    }
+        View row = convertView;
+        ViewHolder holder = null;
 
-    public long getItemId(int position) {
-        return 0;
-    }
 
-    // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+        if (row == null) {
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            row = inflater.inflate(layoutResourceId, parent, false);
+            holder = new ViewHolder();
+            holder.imageTitle = (TextView) row.findViewById(R.id.text);
+            holder.image = (ImageView) row.findViewById(R.id.image);
+            row.setTag(holder);
         } else {
-            imageView = (ImageView) convertView;
+            holder = (ViewHolder) row.getTag();
         }
 
 
-        imageView.setImageURI(mBitmapImagesUri[position]);
-        return imageView;
+        ImageItem item = (ImageItem) data.get(position);
+        holder.imageTitle.setText(item.getTitle());
+        holder.image.setImageBitmap(item.getImage());
+
+
+        return row;
     }
 
-
-
-
-
-
+    static class ViewHolder {
+        TextView imageTitle;
+        ImageView image;
+    }
 }

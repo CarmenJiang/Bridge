@@ -77,7 +77,7 @@ public class AddNewPerson extends AppCompatActivity {
                     sfh.writeToPeople(name, filename);
                     sfh.saveImage(filename, bitmap);
                 }
-                PersonMap.map.put(name, sfh.getImageUri(filename));
+                PersonMap.addImageItem(bitmap,name);
 //                startActivity(new Intent(AddNewPerson.this, getParent().getClass()));
                 finish();
             }
