@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -82,6 +83,18 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        final ListView listView = (ListView) findViewById(R.id.list);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, PersonMap.getNames());
+        listView.setAdapter(adapter);
+
+
     }
 
 

@@ -72,17 +72,13 @@ public class ListGalleryActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//
-//        Iterator it = PersonMap.map.entrySet().iterator();
-//        while (it.hasNext()) {
-//            Map.Entry pair = (Map.Entry)it.next();
-//            names.add((String)pair.getKey());
-//            images.add((Bitmap)pair.getValue());
-//        }
-//
-//
-//    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        GridView gridview = (GridView) findViewById(R.id.gridView);
+        gridview.setAdapter(new ImageAdapter(this,R.layout.grid_item_layout, PersonMap.imageItems));
+
+
+    }
 }
