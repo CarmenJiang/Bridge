@@ -62,7 +62,7 @@ public class ImageAdapter extends ArrayAdapter {
 
         ImageItem item = (ImageItem) data.get(position);
         holder.imageTitle.setText(item.getTitle());
-        holder.image.setImageBitmap(item.getImage());
+        holder.image.setImageBitmap(PersonMap.scaleDown(item.getImage(), 200, true));
 
 
         return row;

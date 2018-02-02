@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +27,9 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public class LearningModeQuestion extends AppCompatActivity {
@@ -34,16 +39,16 @@ public class LearningModeQuestion extends AppCompatActivity {
     EditText enterName;
     TextView sc;
     MediaPlayer mediaPlayer;
-    saveFileHandler sfh;
     int score = 0;
     int turns = 1;
     ImageSwitcher imageSwitcher;
+    Iterator<ImageItem> randomIterator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        randomIterator = null;
 
-        sfh = new saveFileHandler(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning_mode_question);
 
@@ -54,7 +59,6 @@ public class LearningModeQuestion extends AppCompatActivity {
         final Button next = findViewById(R.id.buttonNext);
 
         enterName = findViewById(R.id.enterName);
-        info = sfh.getPeople();
         imageSwitcher = findViewById(R.id.randomPicture);
 
 
@@ -72,7 +76,7 @@ public class LearningModeQuestion extends AppCompatActivity {
 
 
 
-        imageSwitcher.setImageURI(nextPicture());
+        imageSwitcher.setImageDrawable(new BitmapDrawable(getResources(), nextPicture()));
         Animation in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in);
         Animation out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out);
 
@@ -96,15 +100,16 @@ public class LearningModeQuestion extends AppCompatActivity {
 
                 }
 
-                if (turns == 10) {
+                if (turns == 10 || turns == PersonMap.imageItems.size()) {
                     Intent i = new Intent(LearningModeQuestion.this, ViewScoreActivity.class);
                     i.putExtra("score", score);
                     finish();
                     startActivity(i);
                 }else{
-                    imageSwitcher.setImageURI(nextPicture());
-
+                    imageSwitcher.setImageDrawable(new BitmapDrawable(getResources(), nextPicture()));
                 }
+
+
 
                 enterName.setText("");
                 turns++;
@@ -114,14 +119,26 @@ public class LearningModeQuestion extends AppCompatActivity {
 
     }
 
-    private Uri nextPicture() {
-        Random rm = new Random();
-        rand = rm.nextInt(info.size());
-        correctName = info.get(rand).split("\\+")[0];
-        Log.i("correctName", correctName);
-        Uri picture = sfh.getImageUri(info.get(rand).split("\\+")[1] + "_full_sized");
-        return picture;
+    private Bitmap nextPicture() {
+        if(randomIterator ==null)
+            setUpIterator();
+        if(randomIterator.hasNext()) {
+            ImageItem item = randomIterator.next();
+            correctName = item.getTitle();
+            return item.getImage();
+        }
+        return null;
     }
+
+    private void setUpIterator() {
+        ArrayList<ImageItem> newList = new ArrayList<ImageItem>(PersonMap.imageItems);
+        long seed = System.nanoTime();
+        Collections.shuffle(newList, new Random(seed));
+        randomIterator = newList.iterator();
+
+    }
+
+
 
     public void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);

@@ -24,13 +24,13 @@ public class PersonMap {
 
             for (String s : pList) {
                 String[] info = s.split("\\+");
-                imageItems.add(new ImageItem(scaleDown(sfh.getImage(info[1]), 200, true), info[0]));
+                imageItems.add(new ImageItem(sfh.getImage(info[1]), info[0]));
             }
         }
     }
 
     public static void addImageItem(Bitmap bitmap, String title){
-        imageItems.add(new ImageItem(scaleDown(bitmap, 200, true), title));
+        imageItems.add(new ImageItem(bitmap, title));
     }
 
     public static String[] getNames(){

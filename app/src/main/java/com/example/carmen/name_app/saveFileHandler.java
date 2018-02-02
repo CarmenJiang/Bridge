@@ -8,7 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.ImageView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -121,13 +120,12 @@ public class saveFileHandler {
             // Get the bitmap from drawable object
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
-            saveThumbnail(imageName, bitmap);
-            saveFullSized(imageName, bitmap);
+            saveImage(imageName, bitmap);
 
         }
     }
 
-    private void saveThumbnail(String imageName, Bitmap bitmap) {
+    public void saveImage(String imageName, Bitmap bitmap) {
 
         ContextWrapper wrapper = new ContextWrapper(mContext);
 
@@ -139,41 +137,6 @@ public class saveFileHandler {
 
 
         file = new File(file, imageName + ".jpg");
-
-        if (!file.exists()) {
-
-            Log.i("file Doesn't exist", file.getPath());
-            try {
-
-                OutputStream stream = null;
-
-                stream = new FileOutputStream(file);
-
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 15, stream);
-
-                stream.flush();
-                stream.close();
-
-            } catch (IOException e) // Catch the exception
-            {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private void saveFullSized(String imageName, Bitmap bitmap) {
-
-        ContextWrapper wrapper = new ContextWrapper(mContext);
-
-
-        // Initializing a new file
-        // The bellow line return a directory in internal storage
-
-        File file = wrapper.getDir("Images", mContext.MODE_PRIVATE);
-
-
-        file = new File(file, imageName + "_full_sized" + ".jpg");
 
         if (!file.exists()) {
 
@@ -197,13 +160,7 @@ public class saveFileHandler {
         }
     }
 
-    public void saveImage(String imageName, Bitmap bitmap) {
 
-        saveThumbnail(imageName, bitmap);
-        saveFullSized(imageName, bitmap);
-
-
-    }
 
     public void writeToPeople(String personName, String personImageName) {
 
@@ -221,4 +178,12 @@ public class saveFileHandler {
         }
 
     }
+
+    public void deletePerson(String personName){
+
+
+
+    }
+
+
 }

@@ -31,13 +31,14 @@ public class showPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_person);
         TextView textView = (TextView) findViewById(R.id.personName);
         ImageView imageView = (ImageView) findViewById(R.id.personPicture);
-        ImageItem person = PersonMap.imageItems.get(getIntent().getIntExtra("PersonNumber", 0));
+        final int personNumber = getIntent().getIntExtra("PersonNumber", 0);
+        ImageItem person = PersonMap.imageItems.get(personNumber);
         textView.setText(person.getTitle());
-        imageView.setImageBitmap(PersonMap.getFullSizedPicture(person.getTitle()));
+        imageView.setImageBitmap(person.getImage());
 
-        final Button button = findViewById(R.id.buttonHome);
+        final Button homeButton = findViewById(R.id.buttonHome);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(showPersonActivity.this, MainActivity.class);
@@ -45,6 +46,17 @@ public class showPersonActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        final ImageView deleteButton = findViewById(R.id.deleteButton);
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PersonMap.imageItems.remove(personNumber);
+            }
+        });
+
+
 
 
 
