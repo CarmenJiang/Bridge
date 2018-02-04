@@ -19,9 +19,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-/**
- * Created by Eier on 23.01.2018.
- */
 
 public class saveFileHandler {
     Context mContext;

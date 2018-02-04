@@ -12,7 +12,9 @@
     <string name="highscore">Highscore</string>
     <string name="start_game">Start game</string>
     <string name="home">Home</string>
+    <string name="owner">Owner</string>
     <string name="save">Save</string>
+    <string name="registerOwner">Please register owner before continuing</string>
     <string name="next">Next</string>
     <string name="score">Score:</string>
     <string name="title_activity_list_gallery">ListGalleryActivity</string>
