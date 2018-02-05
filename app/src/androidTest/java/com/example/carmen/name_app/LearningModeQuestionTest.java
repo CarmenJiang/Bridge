@@ -35,10 +35,15 @@ public class LearningModeQuestionTest {
     @Test
     public void correctAnswerGivesPoint() {
 
-        Intent intent = new Intent();
-        activityRule.launchActivity(intent);
+
+
+        activityRule.launchActivity(new Intent());
+
+
 
         String correct = activityRule.getActivity().correctName;
+
+
         int startpoints = activityRule.getActivity().score;
         onView(withId(R.id.enterName)).perform(typeText(correct));
         onView(withId(R.id.buttonNext)).perform(click());
