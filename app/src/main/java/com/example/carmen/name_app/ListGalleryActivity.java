@@ -36,6 +36,10 @@ public class ListGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_gallery);
         final ImageView addPerson = findViewById(R.id.addPerson);
 
+        sfh = new saveFileHandler(getApplicationContext());
+        sfh.setupPeople();
+        PersonMap.setup(sfh);
+
         addPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
