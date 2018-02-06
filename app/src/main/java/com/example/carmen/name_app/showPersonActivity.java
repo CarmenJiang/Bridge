@@ -49,7 +49,7 @@ public class showPersonActivity extends AppCompatActivity {
 
         final ImageView deleteButton = findViewById(R.id.deleteButton);
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PersonMap.imageItems.remove(personNumber);

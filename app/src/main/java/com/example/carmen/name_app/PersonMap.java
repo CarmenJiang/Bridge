@@ -20,8 +20,8 @@ public class PersonMap {
         saveFileHandler = sfh;
         if (imageItems.isEmpty()) {
         ArrayList<String> pList = sfh.getPeople();
-            Log.i("PersonMap", "setup Happens");
-
+            Log.i("PersonMap", "setup happens");
+            Log.i("pList.length", "" + pList.size());
             for (String s : pList) {
                 String[] info = s.split("\\+");
                 imageItems.add(new ImageItem(sfh.getImage(info[1]), info[0]));

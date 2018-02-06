@@ -22,6 +22,7 @@ import java.net.URI;
 
 public class AddNewPerson extends AppCompatActivity {
     ImageView imageView;
+    Button saveButton;
     private Uri imageUri;
     EditText editText;
     Bitmap bitmap;
@@ -34,7 +35,7 @@ public class AddNewPerson extends AppCompatActivity {
         sfh = new saveFileHandler(getApplicationContext());
         final Button pictureFromCamera = findViewById(R.id.addPictureFromCamera);
         final Button pictureFromGallery = findViewById(R.id.addPictureFromGallery);
-        final Button saveButton = findViewById(R.id.saveButton);
+        saveButton = findViewById(R.id.saveButton);
         imageView = findViewById(R.id.showImage);
         editText = findViewById(R.id.addName);
 
