@@ -48,6 +48,7 @@ public class LearningModeQuestion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         randomIterator = null;
+        PersonMap.setup(new saveFileHandler(this));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning_mode_question);
@@ -120,6 +121,7 @@ public class LearningModeQuestion extends AppCompatActivity {
     }
 
     private Bitmap nextPicture() {
+        Log.i("nextPicture", "blir kalt");
         if(randomIterator ==null)
             setUpIterator();
         if(randomIterator.hasNext()) {
