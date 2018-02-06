@@ -36,6 +36,8 @@ ImageView imageView;
 
         if(name.equals("Not found")) {
             so = new StoreOwner(MainActivity.this);
+            so.setCancelable(false);
+            so.setCanceledOnTouchOutside(false);
             so.show();
         }
 
